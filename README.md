@@ -21,9 +21,6 @@ $ terraform init
 
 # ----------------------------
 
-$ # Specify a file that contains key/value pair for variable values & then destroy the world. Skip interactive approval of plan before applying
-$ terraform destroy -var-file=./server_1_main.tfvars -auto-approve
-
 $ # Specify a file that contains key/value pair for variable values & then plan a strategy. Skip interactive approval of plan before applying
 $ terraform plan -var-file=./server_1_main.tfvars -auto-approve
 
@@ -35,5 +32,5 @@ $ terraform apply -var-file=./server_1_main.tfvars -auto-approve
 
 ```
 
-**server_1_main.tfvars** has been deliberately omitted in the `git commit` to conceal my server credentials.
+**server_1_main.tfvars** has been deliberately omitted in the `git commit` to conceal my Contabo VPS credentials.
 
