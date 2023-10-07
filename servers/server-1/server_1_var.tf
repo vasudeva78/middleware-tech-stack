@@ -60,6 +60,11 @@ variable "server_1_ssh_public_key" {
   description = "Location of SSH public key."
 }
 
+variable "server_1_dnf_automatic" {
+  type        = string
+  description = "Location of automatic conf file for automatic patch update"
+}
+
 variable packages {
   type    = list
   default = []

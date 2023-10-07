@@ -26,9 +26,10 @@ data "template_file" "user_data" {
   template = file("server_1_cloud_config.yml")
 
   vars = {
-    root_user      = var.server_1_root_user
-    ssh_public_key = file(var.server_1_ssh_public_key)
-    packages       = jsonencode(var.packages)
+    root_user          = var.server_1_root_user
+    ssh_public_key     = file(var.server_1_ssh_public_key)
+    dnf_automatic_conf = file(var.server_1_dnf_automatic)
+    packages           = jsonencode(var.packages)
   }
 }
 
@@ -48,7 +49,7 @@ resource "contabo_instance" "server_1" {
   # Ubuntu 22.04 image
   #  image_id = "afecbb85-e2fc-46f0-9684-b46b1faf00bb"
 
-  root_password = contabo_secret.root_password_server_1.id
-  user_data     = data.template_file.user_data.rendered
+  #  root_password = contabo_secret.root_password_server_1.id
+  user_data = data.template_file.user_data.rendered
 
 }

@@ -12,6 +12,7 @@ users:
 # will get a message to login instead as the default $user
 disable_root: true
 
+
 mount_default_fields: [ ~, ~, 'auto', 'defaults,nofail,x-systemd.requires=cloud-init.service,_netdev', '0', '2' ]
 resize_rootfs_tmp: /dev
 ssh_pwauth: 0
@@ -93,6 +94,38 @@ system_info:
 # our configurations start here
 bootcmd:
   - date > /etc/birth_certificate
-  - dnf install dnf-automatic -y
+  - sudo dnf update && sudo dnf upgrade-minimal -y
+  - sudo dnf install dnf-automatic -y
 
 timezone: Europe/London
+
+write_files:
+  - path: /etc/dnf/automatic.conf
+    content: |
+      [commands]
+      upgrade_type = security
+      random_sleep = 0
+      network_online_timeout = 60
+      download_updates = yes
+      apply_updates = yes
+      [emitters]
+      emit_via = motd
+
+  - path: /usr/lib/systemd/system/dnf-automatic-install.timer
+    content: |
+      [Unit]
+      Description=dnf-automatic-install timer
+      # See comment in dnf-makecache.service
+      ConditionPathExists=!/run/ostree-booted
+      Wants=network-online.target
+
+      [Timer]
+      OnCalendar=*-*-* 2:00
+      RandomizedDelaySec = 0m
+      Persistent=true
+
+      [Install]
+      WantedBy=timers.target
+
+runcmd:
+  - [ sudo, systemctl, enable, --now, dnf-automatic.timer ]

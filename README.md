@@ -22,15 +22,23 @@ $ terraform init
 # ----------------------------
 
 $ # Specify a file that contains key/value pair for variable values & then plan a strategy. Skip interactive approval of plan before applying
-$ terraform plan -var-file=./server_1_main.tfvars -auto-approve
+$ terraform plan -auto-approve -var-file=./server_1_main.tfvars 
 
 $ # Specify a file that contains key/value pair for variable values & then destroy the world. Skip interactive approval of plan before applying
-$ terraform destroy -var-file=./server_1_main.tfvars -auto-approve
+$ terraform destroy -auto-approve -var-file=./server_1_main.tfvars 
 
 $ # Specify a file that contains key/value pair for variable values & then apply configs. Skip interactive approval of plan before applying
-$ terraform apply -var-file=./server_1_main.tfvars -auto-approve
+$ terraform apply -auto-approve -var-file=./server_1_main.tfvars 
 
 ```
 
 **server_1_main.tfvars** has been deliberately omitted in the `git commit` to conceal my Contabo VPS credentials.
 
+### Server Operating System
+
+Rocky Linux 9 : https://docs.rockylinux.org/guides/
+
+### What the Terraform script do ?
+
+1. Enable auto update feature in Rocky Linux 9
+2. 
