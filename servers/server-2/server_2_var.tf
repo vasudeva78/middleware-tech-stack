@@ -25,17 +25,17 @@ variable "oauth2_pass" {
 # ---------------------------------------------------------------------------------------------------------------------
 # Contabo instance details
 # ---------------------------------------------------------------------------------------------------------------------
-variable "server_1_public_ip" {
+variable "server_2_public_ip" {
   type      = string
   sensitive = true
 }
 
-variable "server_1_contabo_region" {
+variable "server_2_contabo_region" {
   type        = string
   description = "https://api.contabo.com/#tag/Instances/operation/createInstance"
 }
 
-variable "server_1_existing_instance_id" {
+variable "server_2_existing_instance_id" {
   type        = string
   description = "GET instance id from ```cntb get instances```"
 }
@@ -45,12 +45,12 @@ variable "server_1_existing_instance_id" {
 # Variables used for generation of metadata and userdata.
 # ---------------------------------------------------------------------------------------------------------------------
 
-variable "server_1_root_user" {
+variable "server_2_root_user" {
   type        = string
   description = "Root user in the remote machine"
 }
 
-variable "server_1_ssh_public_key" {
+variable "server_2_ssh_public_key" {
   type        = string
   description = "Location of SSH public key."
 }
