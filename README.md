@@ -41,4 +41,6 @@ Rocky Linux 9 : https://docs.rockylinux.org/guides/
 ### What the Terraform script do ?
 
 1. Enable auto update feature in Rocky Linux 9
-2. 
+2. Firewalld setup -- TODO
+3. Rootkit Hunter setup -- TODO
+4. SELinux setup -- TODO

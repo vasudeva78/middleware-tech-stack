@@ -15,13 +15,6 @@ provider "contabo" {
   oauth2_pass          = var.oauth2_pass
 }
 
-# Create a new login password secret for server 1
-resource "contabo_secret" "root_password_server_1" {
-  name  = "root_password_server_1"
-  type  = "password"
-  value = var.server_1_login_password
-}
-
 data "template_file" "user_data" {
   template = file("server_1_cloud_config.yml")
 
@@ -49,7 +42,6 @@ resource "contabo_instance" "server_1" {
   # Ubuntu 22.04 image
   #  image_id = "afecbb85-e2fc-46f0-9684-b46b1faf00bb"
 
-  #  root_password = contabo_secret.root_password_server_1.id
   user_data = data.template_file.user_data.rendered
 
 }

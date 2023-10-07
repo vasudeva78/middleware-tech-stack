@@ -96,6 +96,8 @@ bootcmd:
   - date > /etc/birth_certificate
   - sudo dnf update && sudo dnf upgrade-minimal -y
   - sudo dnf install dnf-automatic -y
+  - sudo dnf install firewalld -y
+  - sudo systemctl enable --now firewalld
 
 timezone: Europe/London
 
