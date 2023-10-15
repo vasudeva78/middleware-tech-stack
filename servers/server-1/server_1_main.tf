@@ -16,7 +16,7 @@ provider "contabo" {
 }
 
 data "template_file" "user_data" {
-  template = file("server_1_cloud_config.yml")
+  template = file("../server_cloud_config.yml")
 
   vars = {
     root_user      = var.server_1_root_user

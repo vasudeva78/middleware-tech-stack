@@ -1,18 +1,25 @@
-# Manage Servers Using Terraform 🌐
+# middleware-tecl-stack
 
-Terraform scripts to manage servers on Contabo
+is an attempt to **manage & provision** 'N' node Kubernetes cluster on public cloud using open source tools.<br/>
+The steps involve
 
-Why Contabo?
+1. [Provision servers with a Linux distribution](#provision-servers-with-a-linux-distribution)
+
+2. [Install Rancher Kubernetes engine](#install-rancher-kubernetes-engine)
+
+# Provision servers with a Linux distribution
+
+We used _**Terraform scripts**_ to manage servers on _Contabo_
+
+#### _Why Contabo?_
 
 1. [x] Infrastructure-as-a-service provider since 2003
 2. [x] Virtual Private Server(VPS), Virtual Dedicated Server(VDS), Storage Virtual Private Server(sVPS) provider
 3. [x] You can own a public cloud for the price of 2 Starbucks Cappuccino drinks (£8) a month with no additional cost
-4. [x] Not affiliated to the provider, in any manner
 
-## Folder _servers_
+#### _Navigate to servers folder_
 
-All servers with appropriate Linux
-images & [cloud-init](https://cloudinit.readthedocs.io/en/latest/reference/modules.html) configs are provisioned here
+All servers with **Rocky Linux 9 distribution image & cloud-init configs** are provisioned here
 
 ```bash
 $ # Initialize a working directory
@@ -48,14 +55,15 @@ $ terraform apply -auto-approve -var-file=./server_2_main.tfvars
 
 ```
 
-**server_1_main.tfvars** has been deliberately omitted in the `git commit` as per best pratices.
+**server_*_main.tfvars** has been deliberately omitted in the `git commit` as per best practices.
 
-### Server Operating System
+#### _Useful Links_
 
-* Rocky Linux 9 : https://docs.rockylinux.org/guides/
-* **dnf** command wiki : https://dnf.readthedocs.io/en/latest/automatic.html#configuration-file-format
+* Rocky Linux 9 Security : https://docs.rockylinux.org/guides/
+* cloud-init: https://cloudinit.readthedocs.io/en/latest/reference/modules.html
+* **dnf** command : https://dnf.readthedocs.io/en/latest/automatic.html#configuration-file-format
 
-### What the Terraform script do ?
+#### _Terraform script_
 
 1. Enable auto update feature in Rocky Linux 9
 
@@ -73,3 +81,7 @@ $ sudo systemctl status firewalld
 
 3. Rootkit Hunter setup -- TODO
 4. SELinux setup -- TODO
+
+# Install Rancher Kubernetes engine
+
+ddd
