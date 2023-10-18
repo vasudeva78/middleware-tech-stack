@@ -40,7 +40,7 @@ variable "server_contabo_region" {
   description = "https://api.contabo.com/#tag/Instances/operation/createInstance"
 }
 
-variable "server_existing_instance_id" {
+variable "server_this_instance_id" {
   type        = string
   description = "GET instance id from ```cntb get instances```"
 }

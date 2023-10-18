@@ -1,13 +1,40 @@
-# middleware-tecl-stack
+# Kubernetes cluster provisioning from Ground-up
 
-is an attempt to **manage & provision** 'N' node Kubernetes cluster on public cloud using open source tools.<br/>
+is an attempt to **manage & provision** 'N' node Kubernetes cluster on public cloud using only open source
+tools.<br/><br/>
 The steps involve
 
-1. [Provision servers with a Linux distribution](#provision-servers-with-a-linux-distribution)
+1. [Add a private network](#add-a-private-network)
 
-2. [Install Rancher Kubernetes engine](#install-rancher-kubernetes-engine)
+2. [Provision servers with a Linux distribution](#provision-servers-with-a-linux-distribution)
 
-# Provision servers with a Linux distribution
+3. [Install Rancher Kubernetes engine](#install-rancher-kubernetes-engine)
+
+# Add a private network
+
+Contabo mandates servers instances to be **reinstalled** once a private network is provisioned between instances.
+Hence, setting a private network is essential before servers instances are really provisioned.
+
+```bash
+$ # Initialize a working directory
+$ cd private-network
+$ terraform init
+
+# ----------------------------
+
+$ # Specify a file that contains key/value pair for variable values & then plan a strategy. Skip interactive approval of plan before applying
+$ terraform plan -auto-approve -var-file=./private_network.tfvars  
+
+$ # Specify a file that contains key/value pair for variable values & then destroy the world. Skip interactive approval of plan before applying
+$ terraform destroy -auto-approve -var-file=./private_network.tfvars 
+
+$ # Specify a file that contains key/value pair for variable values & then apply configs. Skip interactive approval of plan before applying
+$ terraform apply -auto-approve -var-file=./private_network.tfvars  
+
+
+```
+
+# Provision servers with a Linux distr0
 
 ### _Why Contabo?_
 
@@ -36,13 +63,13 @@ $ terraform init
 # ----------------------------
 
 $ # Specify a file that contains key/value pair for variable values & then plan a strategy. Skip interactive approval of plan before applying
-$ terraform plan -auto-approve -var-file=./server_1_main.tfvars 
+$ terraform plan -auto-approve -var-file=./server_1.tfvars  
 
 $ # Specify a file that contains key/value pair for variable values & then destroy the world. Skip interactive approval of plan before applying
-$ terraform destroy -auto-approve -var-file=./server_1_main.tfvars 
+$ terraform destroy -auto-approve -var-file=./server_1.tfvars 
 
 $ # Specify a file that contains key/value pair for variable values & then apply configs. Skip interactive approval of plan before applying
-$ terraform apply -auto-approve -var-file=./server_1_main.tfvars 
+$ terraform apply -auto-approve -var-file=./server_1.tfvars  
 
 $ # Initialize a working directory
 $ cd server-2
@@ -51,13 +78,13 @@ $ terraform init
 # ----------------------------
 
 $ # Specify a file that contains key/value pair for variable values & then plan a strategy. Skip interactive approval of plan before applying
-$ terraform plan -auto-approve -var-file=./server_2_main.tfvars 
+$ terraform plan -auto-approve -var-file=./server_2.tfvars 
 
 $ # Specify a file that contains key/value pair for variable values & then destroy the world. Skip interactive approval of plan before applying
-$ terraform destroy -auto-approve -var-file=./server_2_main.tfvars 
+$ terraform destroy -auto-approve -var-file=./server_2.tfvars 
 
 $ # Specify a file that contains key/value pair for variable values & then apply configs. Skip interactive approval of plan before applying
-$ terraform apply -auto-approve -var-file=./server_2_main.tfvars 
+$ terraform apply -auto-approve -var-file=./server_2.tfvars 
 
 
 ```

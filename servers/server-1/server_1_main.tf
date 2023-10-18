@@ -34,7 +34,7 @@ resource "contabo_instance" "server_1" {
   product_id           = "V40"
   region               = var.server_contabo_region
   period               = 1
-  existing_instance_id = var.server_existing_instance_id
+  existing_instance_id = var.server_this_instance_id
 
   # Rockylinux 9.0 image
   image_id = "fe6c2c36-031e-4474-aa5c-c5297196c80e"
@@ -45,3 +45,4 @@ resource "contabo_instance" "server_1" {
   user_data = data.template_file.user_data.rendered
 
 }
+
