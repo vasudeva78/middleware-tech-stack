@@ -7,6 +7,13 @@ users:
     sudo: [ "ALL=(ALL) NOPASSWD:ALL" ]
     shell: /bin/bash
 
+  - name: ${docker_user}
+    ssh_authorized_keys:
+      - ${ssh_public_key}
+    gecos: Cloud User
+    groups: [ docker ]
+    sudo: [ "ALL=(ALL) NOPASSWD:ALL" ]
+    shell: /bin/bash
 
 # If this is set, 'root' will not be able to ssh in and they
 # will get a message to login instead as the default $user
@@ -99,6 +106,8 @@ bootcmd:
   - sudo dnf update && sudo dnf upgrade-minimal -y
   - sudo dnf install dnf-automatic -y
   - sudo dnf install firewalld -y
+  - sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && sudo dnf -y install docker-ce containerd.io
+
 
 timezone: Europe/London
 
@@ -131,5 +140,6 @@ write_files:
       WantedBy=timers.target
 
 runcmd:
-  - [ sudo, systemctl, enable, --now, dnf-automatic.timer ]
-  - [ sudo, systemctl, enable, --now, firewalld ]
+  - [ sudo, systemctl, --now, enable, dnf-automatic.timer ]
+  - [ sudo, systemctl, --now, enable, firewalld ]
+  - [ sudo, systemctl, --now, enable, docker ]

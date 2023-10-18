@@ -9,17 +9,24 @@ The steps involve
 
 # Provision servers with a Linux distribution
 
-We used _**Terraform scripts**_ to manage servers on _Contabo_
-
-#### _Why Contabo?_
+### _Why Contabo?_
 
 1. [x] Infrastructure-as-a-service provider since 2003
 2. [x] Virtual Private Server(VPS), Virtual Dedicated Server(VDS), Storage Virtual Private Server(sVPS) provider
 3. [x] You can own a public cloud for the price of 2 Starbucks Cappuccino drinks (£8) a month with no additional cost
 
-#### _Navigate to servers folder_
+```bash
+$ # Get all instances
+$ cntb get instances
+```
 
-All servers with **Rocky Linux 9 distribution image & cloud-init configs** are provisioned here
+#### _Useful Links_
+
+* Contabo API : https://api.contabo.com/#section/Introduction
+
+### _Navigate to servers folder_
+
+All servers with **Rocky Linux 9 distribution image & cloud-init configs** are provisioned using **Terraform** scripts
 
 ```bash
 $ # Initialize a working directory
@@ -63,7 +70,7 @@ $ terraform apply -auto-approve -var-file=./server_2_main.tfvars
 * cloud-init: https://cloudinit.readthedocs.io/en/latest/reference/modules.html
 * **dnf** command : https://dnf.readthedocs.io/en/latest/automatic.html#configuration-file-format
 
-#### _Terraform script_
+#### _Terraform script do_
 
 1. Enable auto update feature in Rocky Linux 9
 
@@ -84,4 +91,6 @@ $ sudo systemctl status firewalld
 
 # Install Rancher Kubernetes engine
 
-ddd
+#### _Useful Links_
+
+* Rancker Kubernetes Engine : https://rke.docs.rancher.com

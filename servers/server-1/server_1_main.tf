@@ -19,21 +19,22 @@ data "template_file" "user_data" {
   template = file("../server_cloud_config.yml")
 
   vars = {
-    root_user      = var.server_1_root_user
-    ssh_public_key = file(var.server_1_ssh_public_key)
+    root_user      = var.server_root_user
+    docker_user    = var.server_docker_user
+    ssh_public_key = file(var.server_ssh_public_key)
     packages       = jsonencode(var.packages)
   }
 }
 
 # Create a new compute instance (vps/vds) in region UK, with specs of the V40 product. Also it has a contract period of 1 month
 resource "contabo_instance" "server_1" {
-  display_name = "server_1"
+  display_name = var.server_display_name
 
   # https://api.contabo.com/#tag/Instances/operation/createInstance
   product_id           = "V40"
-  region               = var.server_1_contabo_region
+  region               = var.server_contabo_region
   period               = 1
-  existing_instance_id = var.server_1_existing_instance_id
+  existing_instance_id = var.server_existing_instance_id
 
   # Rockylinux 9.0 image
   image_id = "fe6c2c36-031e-4474-aa5c-c5297196c80e"
