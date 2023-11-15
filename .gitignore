@@ -2,7 +2,7 @@
 **/.terraform/*
 
 # Local .terraform files
-.terraform.**
+.terraform.*.*
 
 # .tfstate files
 *.tfstate
