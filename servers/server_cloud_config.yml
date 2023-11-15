@@ -105,7 +105,7 @@ bootcmd:
   - date > /etc/birth_certificate
   - sudo dnf update && sudo dnf upgrade-minimal -y
   - sudo dnf install dnf-automatic -y
-  - sudo dnf install firewalld -y
+  #  - sudo dnf install firewalld -y // for time being to install RKE
   - sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && sudo dnf -y install docker-ce containerd.io
 
 
@@ -141,5 +141,5 @@ write_files:
 
 runcmd:
   - [ sudo, systemctl, --now, enable, dnf-automatic.timer ]
-  - [ sudo, systemctl, --now, enable, firewalld ]
+  #  - [ sudo, systemctl, --now, enable, firewalld ] // for time being to install RKE
   - [ sudo, systemctl, --now, enable, docker ]
