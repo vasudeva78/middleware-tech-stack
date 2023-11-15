@@ -36,3 +36,6 @@ terraform.rc
 # Exclude .idea files
 .idea/*
 
+# Exclude kubeconfig cluster yaml 
+kube_config_cluster.*
+
