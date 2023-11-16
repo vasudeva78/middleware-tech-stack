@@ -97,6 +97,7 @@ $ terraform apply -auto-approve -var-file=./server_2.tfvars
 #### _Useful Links_
 
 * Rocky Linux 9 Security : https://docs.rockylinux.org/guides/
+* firewalld : https://firewalld.org/documentation/
 * cloud-init: https://cloudinit.readthedocs.io/en/latest/reference/modules.html
 * **dnf** command : https://dnf.readthedocs.io/en/latest/automatic.html#configuration-file-format
 
@@ -153,7 +154,7 @@ $ terraform init
 # ----------------------------
 
 $ # Apply configs. Skip interactive approval of plan before applying
-$ terraform apply -auto-approve
+$ terraform apply -auto-approve -var-file=./rancher_k8s_engine.tfvars
 
 # ----------------------------
 
