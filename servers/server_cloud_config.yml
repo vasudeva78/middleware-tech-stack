@@ -102,12 +102,11 @@ system_info:
 
 # our configurations start here
 bootcmd:
-  - date > /etc/birth_certificate
+  - echo "${root_user} - $(date)" > /etc/birth_certificate
   - sudo dnf update && sudo dnf upgrade-minimal -y
   - sudo dnf install dnf-automatic -y
-  #  - sudo dnf install firewalld -y // for time being to install RKE
+  - sudo dnf install firewalld -y
   - sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && sudo dnf -y install docker-ce containerd.io
-
 
 timezone: Europe/London
 
@@ -139,7 +138,43 @@ write_files:
       [Install]
       WantedBy=timers.target
 
+  - path: /etc/firewalld/zones/k8s.xml
+    content: |
+      <?xml version="1.0" encoding="utf-8"?>
+      <zone target="ACCEPT">
+        <short>k8s-zone</short>
+        <description>This is a zone for K8s</description>
+        <service name="ssh"/>
+        <service name="http"/>
+        <service name="https"/>
+        <service name="dhcpv6-client"/>
+
+        <port port="6443" protocol="tcp"/>
+        <port port="2379-2380" protocol="tcp"/>
+        <port port="9099" protocol="tcp"/>
+        <port port="111" protocol="tcp"/>
+        <port port="323" protocol="tcp"/>
+        <port port="10248-10259" protocol="tcp"/>
+        <port port="40809" protocol="tcp"/>
+
+        <rule family="ipv4">
+          <source address="${firewalld_source_ip}"/>
+          <accept/>
+        </rule>
+
+        <rule family="ipv4">
+          <source address="172.17.0.0/16"/>
+          <masquerade/>
+        </rule>
+
+        <interface name="eth0"/>
+        <interface name="eth1"/>
+        <interface name="flannel.1"/>
+      
+        <forward/>
+      </zone>
+
 runcmd:
   - [ sudo, systemctl, --now, enable, dnf-automatic.timer ]
-  #  - [ sudo, systemctl, --now, enable, firewalld ] // for time being to install RKE
+  - [ sudo, systemctl, --now, enable, firewalld ]
   - [ sudo, systemctl, --now, enable, docker ]

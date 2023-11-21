@@ -19,19 +19,20 @@ data "template_file" "user_data" {
   template = file("../server_cloud_config.yml")
 
   vars = {
-    root_user      = var.server_root_user
-    docker_user    = var.server_docker_user
-    ssh_public_key = file(var.server_ssh_public_key)
-    packages       = jsonencode(var.packages)
+    root_user           = var.server_root_user
+    docker_user         = var.server_docker_user
+    firewalld_source_ip = var.firewalld_source_ip
+    ssh_public_key      = file(var.server_ssh_public_key)
+    packages            = jsonencode(var.packages)
   }
 }
 
 # Create a new compute instance (vps/vds) in region UK, with specs of the V40 product. Also it has a contract period of 1 month
-resource "contabo_instance" "server_1" {
+resource "contabo_instance" "server_3" {
   display_name = var.server_display_name
 
   # https://api.contabo.com/#tag/Instances/operation/createInstance
-  product_id           = "V40"
+  product_id           = "V12"
   region               = var.server_contabo_region
   period               = 1
   existing_instance_id = var.server_this_instance_id

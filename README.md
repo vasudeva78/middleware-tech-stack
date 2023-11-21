@@ -176,8 +176,8 @@ $ kubectl --kubeconfig kube_config_cluster.yml get nodes
 
 * Rancker Kubernetes Engine : https://rke.docs.rancher.com
 * cluster.yml :
-    * Full cluster.yml : https://rke.docs.rancher.com/example-yamls#full-clusteryml-example
-    * cluster.yml documentation: https://rancher.support/training/rke/rke-cluster-yaml-breakdown
+  * Full cluster.yml : https://rke.docs.rancher.com/example-yamls#full-clusteryml-example
+  * cluster.yml documentation: https://rancher.support/training/rke/rke-cluster-yaml-breakdown
 * Terraform provider for RKE
-    * https://github.com/rancher/terraform-provider-rke
-    * https://registry.terraform.io/providers/rancher/rke/latest/docs/resources/cluster
+  * https://github.com/rancher/terraform-provider-rke
+  * https://registry.terraform.io/providers/rancher/rke/latest/docs/resources/cluster

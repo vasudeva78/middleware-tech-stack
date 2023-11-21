@@ -19,10 +19,11 @@ data "template_file" "user_data" {
   template = file("../server_cloud_config.yml")
 
   vars = {
-    root_user      = var.server_root_user
-    docker_user    = var.server_docker_user
-    ssh_public_key = file(var.server_ssh_public_key)
-    packages       = jsonencode(var.packages)
+    root_user           = var.server_root_user
+    docker_user         = var.server_docker_user
+    firewalld_source_ip = var.firewalld_source_ip
+    ssh_public_key      = file(var.server_ssh_public_key)
+    packages            = jsonencode(var.packages)
   }
 }
 

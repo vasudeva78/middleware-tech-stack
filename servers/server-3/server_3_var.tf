@@ -66,6 +66,11 @@ variable "server_ssh_public_key" {
   description = "Location of SSH public key."
 }
 
+variable "firewalld_source_ip" {
+  type        = string
+  description = "Source Ip address for firewalld reach rules"
+}
+
 variable packages {
   type    = list
   default = []

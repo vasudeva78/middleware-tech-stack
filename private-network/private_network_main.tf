@@ -20,5 +20,5 @@ resource "contabo_private_network" "k8sPrivateNetwork" {
   name         = "k8sPrivateNetwork"
   description  = "Private network for kubernetes"
   region       = var.contabo_region
-  instance_ids = [var.server_1_instance_id, var.server_2_instance_id]
+  instance_ids = [var.server_2_instance_id, var.server_3_instance_id]
 }

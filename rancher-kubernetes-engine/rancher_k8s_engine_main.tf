@@ -23,15 +23,6 @@ resource "rke_cluster" "my-k8s-cluster" {
   enable_cri_dockerd = true
 
   nodes {
-    address          = var.server_1_public_ip
-    internal_address = var.server_1_internal_ip
-    node_name        = var.server_1_name
-    role             = ["controlplane", "worker", "etcd"]
-    user             = var.server_1_docker_user
-    ssh_key          = file(var.ssh_1_private_key)
-  }
-
-  nodes {
     address          = var.server_2_public_ip
     internal_address = var.server_2_internal_ip
     node_name        = var.server_2_name
@@ -39,7 +30,16 @@ resource "rke_cluster" "my-k8s-cluster" {
     user             = var.server_2_docker_user
     ssh_key          = file(var.ssh_2_private_key)
   }
-  
+
+  nodes {
+    address          = var.server_3_public_ip
+    internal_address = var.server_3_internal_ip
+    node_name        = var.server_3_name
+    role             = ["controlplane", "worker", "etcd"]
+    user             = var.server_3_docker_user
+    ssh_key          = file(var.ssh_3_private_key)
+  }
+
 }
 
 ###############################################################################
