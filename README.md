@@ -60,34 +60,34 @@ All servers with **Rocky Linux 9 distribution image & cloud-init configs** are p
 
 ```bash
 $ # Initialize a working directory
-$ cd server-1
-$ terraform init
-
-# ----------------------------
-
-$ # Specify a file that contains key/value pair for variable values & then plan a strategy. Skip interactive approval of plan before applying
-$ terraform plan -auto-approve -var-file=./server_1.tfvars  
-
-$ # Specify a file that contains key/value pair for variable values & then destroy the world. Skip interactive approval of plan before applying
-$ terraform destroy -auto-approve -var-file=./server_1.tfvars 
-
-$ # Specify a file that contains key/value pair for variable values & then apply configs. Skip interactive approval of plan before applying
-$ terraform apply -auto-approve -var-file=./server_1.tfvars  
-
-$ # Initialize a working directory
 $ cd server-2
 $ terraform init
 
 # ----------------------------
 
 $ # Specify a file that contains key/value pair for variable values & then plan a strategy. Skip interactive approval of plan before applying
-$ terraform plan -auto-approve -var-file=./server_2.tfvars 
+$ terraform plan -auto-approve -var-file=./server_2.tfvars  
 
 $ # Specify a file that contains key/value pair for variable values & then destroy the world. Skip interactive approval of plan before applying
 $ terraform destroy -auto-approve -var-file=./server_2.tfvars 
 
 $ # Specify a file that contains key/value pair for variable values & then apply configs. Skip interactive approval of plan before applying
-$ terraform apply -auto-approve -var-file=./server_2.tfvars 
+$ terraform apply -auto-approve -var-file=./server_2.tfvars  
+
+$ # Initialize a working directory
+$ cd server-3
+$ terraform init
+
+# ----------------------------
+
+$ # Specify a file that contains key/value pair for variable values & then plan a strategy. Skip interactive approval of plan before applying
+$ terraform plan -auto-approve -var-file=./server_3.tfvars 
+
+$ # Specify a file that contains key/value pair for variable values & then destroy the world. Skip interactive approval of plan before applying
+$ terraform destroy -auto-approve -var-file=./server_3.tfvars 
+
+$ # Specify a file that contains key/value pair for variable values & then apply configs. Skip interactive approval of plan before applying
+$ terraform apply -auto-approve -var-file=./server_3.tfvars 
 
 
 ```
@@ -98,6 +98,7 @@ $ terraform apply -auto-approve -var-file=./server_2.tfvars
 
 * Rocky Linux 9 Security : https://docs.rockylinux.org/guides/
 * firewalld : https://firewalld.org/documentation/
+* firewalld xml : https://firewalld.org/documentation/man-pages/firewalld.zone.html
 * cloud-init: https://cloudinit.readthedocs.io/en/latest/reference/modules.html
 * **dnf** command : https://dnf.readthedocs.io/en/latest/automatic.html#configuration-file-format
 
@@ -112,10 +113,18 @@ $ sudo systemctl status dnf-automatic.timer
 
 2. Firewalld setup
 
+1. Uses **zones** to segment traffic
+2. _Network interface(s)_ are assigned to one or more **zones**
+3. Each **zone** contains a list of allowed ports and services.
+4. A default **zone** is also available to manage traffic.
+
 ```bash
 
 $ # View all network interfaces
 $ nmcli 
+
+$ # Get all listening ports
+$ sudo ss -tulpn
 
 $ # Check if firewalld.service is running
 $ sudo systemctl status firewalld
